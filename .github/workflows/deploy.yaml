@@ -4,9 +4,9 @@ jobs:
   plan-dev:
     runs-on: ubuntu-latest
     steps:
-      run: echo "not implemented yet!"
+      - run: echo "not implemented yet!"
   
   apply-dev:
     runs-on: ubuntu-latest
     steps:
-      run: echo "not implemented yet!"
+      - run: echo "not implemented yet!"
