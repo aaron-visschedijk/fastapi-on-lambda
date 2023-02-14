@@ -5,9 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     # interruptible: false
     steps:
-      - working-directory: ./deploy
-        run: |
+      - uses: actions/checkout@v3
+      - run: |
           echo "not implemented yet!"
+          echo "$PWD"
+          cd deploy
           echo "$PWD"
 
   
