@@ -1,10 +1,16 @@
-name: Build
+name: Deploy Terraform
 on: push
 jobs:
   plan-dev:
     runs-on: ubuntu-latest
+    # interruptible: false
+    
     steps:
-      - run: echo "not implemented yet!"
+      - run: |
+          echo "not implemented yet!"
+          cd Deploy
+          ls
+
   
   apply-dev:
     runs-on: ubuntu-latest
