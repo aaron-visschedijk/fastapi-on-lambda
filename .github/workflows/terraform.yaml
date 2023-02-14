@@ -4,9 +4,9 @@ jobs:
   plan-dev:
     runs-on: ubuntu-latest
     # interruptible: false
-    
     steps:
-      - run: |
+      - working-directory: ./deploy
+        run: |
           echo "not implemented yet!"
           echo "$PWD"
 
