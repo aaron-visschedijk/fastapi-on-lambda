@@ -8,7 +8,6 @@ jobs:
     steps:
       - run: |
           echo "not implemented yet!"
-          cd Deploy
           ls
 
   
