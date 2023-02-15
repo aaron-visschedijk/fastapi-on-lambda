@@ -10,6 +10,8 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: eu-central-1
+      COMMIT_SHA: ${{ github.sha }}
+      PROJECT_NAME: ${{ github.repository }}
 
     steps:
       - name: Checkout Code
@@ -23,6 +25,10 @@ jobs:
         run: |
           cd deploy
           terraform init
+      - name: Configure Terraform input variables
+        run: |
+          echo build_tag=\"$COMMIT_SHA\" >> vars.auto.tfvars
+          echo project_name=\"$PROJECT_NAME\" >> vars.auto.tfvars
       - name: Terraform Plan
         id: plan
         run: |
