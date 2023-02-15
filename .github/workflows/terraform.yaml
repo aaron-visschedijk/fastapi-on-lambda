@@ -1,16 +1,27 @@
-name: Deploy Terraform
+name: Terraform Deployment
+
 on: push
+
 jobs:
-  plan-dev:
+  plan-development:
     runs-on: ubuntu-latest
-    # interruptible: false
+    
     steps:
-      - uses: actions/checkout@v3
-      - run: |
-          echo "not implemented yet!"
-          echo "$PWD"
-          cd deploy
-          echo "$PWD"
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -input=false
 
   
   apply-dev:
