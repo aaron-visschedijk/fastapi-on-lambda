@@ -29,6 +29,7 @@ jobs:
         run: |
           echo build_tag=\"$COMMIT_SHA\" >> vars.auto.tfvars
           echo project_name=\"$PROJECT_NAME\" >> vars.auto.tfvars
+          cat vars.auto.tfvars
       - name: Terraform Plan
         id: plan
         run: |
