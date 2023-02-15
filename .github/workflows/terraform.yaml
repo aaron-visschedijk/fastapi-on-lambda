@@ -23,16 +23,13 @@ jobs:
         run: |
           cd deploy
           terraform init
-      - name: Configure Terraform input variables
-        run: |
-          echo build_tag=${{ github.sha }} >> vars.auto.tfvars
-          echo project_name=${{ github.repository }} >> vars.auto.tfvars
-          cat vars.auto.tfvars
       - name: Terraform Plan
         id: plan
         run: |
           cd deploy
-          terraform plan -input=false
+          terraform plan \
+          -var 'build_tag=${{ github.sha }}' \
+          -var 'project_name=${{ github.event.repository.name }}'
 
   
   apply-dev:
