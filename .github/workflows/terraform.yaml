@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+      - run: cd deploy
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2
         with:
