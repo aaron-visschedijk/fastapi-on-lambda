@@ -26,6 +26,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
+          cd deploy
           terraform plan \
           -var 'build_tag=${{ github.sha }}' \
           -var 'project_name=${{ github.event.repository.name }}'
