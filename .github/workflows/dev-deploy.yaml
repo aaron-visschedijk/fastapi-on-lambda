@@ -1,6 +1,13 @@
 name: Terraform Deployment
 
-on: push
+on: 
+  workflow_run:
+    workflows: ["build-lambda-package"]
+    types:
+      - "completed"
+
+
+
 
 jobs:
   plan-development:
