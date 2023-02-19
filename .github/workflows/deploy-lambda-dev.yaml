@@ -28,6 +28,7 @@ jobs:
           aws s3 sync --delete ./build s3://annomate-lambdas/${{ github.event.repository.name }}/
   
   terraform:
+    needs: build-lambda-package
     runs-on: ubuntu-latest
     
     steps:
