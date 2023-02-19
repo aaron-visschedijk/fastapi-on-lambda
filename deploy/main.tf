@@ -24,7 +24,7 @@ resource "aws_lambda_function" "lambda" {
   handler       = "lambda_handler"
 
   s3_bucket = "arn:aws:s3:::annomate-lambdas"
-  s3_key = "${var.project_name}/lambda-pkg-${var.build_tag}.zip"
+  s3_key = "/terraform-aws-lambda-pipeline/lambda-pkg-2f9732ca46c899caca2fc3a4d424cfc937e3b745.zip"
 
   runtime = "python3.9"
 }
