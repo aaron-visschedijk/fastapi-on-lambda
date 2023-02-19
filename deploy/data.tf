@@ -1,3 +1,3 @@
-data "s3_bucket" "lambda_bucket" {
+data "aws_s3_bucket" "lambda_bucket" {
     bucket = "annomate-lambdas"
 }
