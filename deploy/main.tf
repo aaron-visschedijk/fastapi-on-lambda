@@ -23,7 +23,7 @@ resource "aws_lambda_function" "lambda" {
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "main.lambda_handler"
 
-  s3_bucket = data.aws_s3_object.lambda_bucket.id
+  s3_bucket = "arn:aws:s3:::annomate-lambdas"
   s3_key = "${var.project_name}/lambda-pkg-${var.build_tag}.zip"
 
   runtime = "python3.9"
