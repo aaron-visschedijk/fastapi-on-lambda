@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = "eu-central-1"
-}
-
 backend "s3" {
   bucket         = "annomate-terraform-state"
   key            = "lambda"
