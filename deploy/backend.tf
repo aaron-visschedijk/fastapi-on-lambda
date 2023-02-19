@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket         = "annomate-terraform-state"
-    key            = var.project_name
+    key            = "lambda"
     region         = "eu-central-1"
     dynamodb_table = "terraform-lock"
   }
