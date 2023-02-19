@@ -1,10 +1,32 @@
-name: Deploy Dev
+name: Terraform Deployment
 
 on: push
 
 jobs:
   plan-development:
     runs-on: ubuntu-latest
+    
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TF_API_TOKEN }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TF_API_TOKEN }}
+      AWS_DEFAULT_REGION: eu-central-1
 
     steps:
-      - run: echo "not implemented"
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Init
+        id: init
+        run: |
+          cd deploy
+          terraform init
+      - name: Terraform Plan
+        id: plan
+        run: |
+          cd deploy
+          terraform plan \
+          -var 'build_tag=${{ github.sha }}' \
+          -var 'project_name=${{ github.event.repository.name }}'
