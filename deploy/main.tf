@@ -21,7 +21,7 @@ EOF
 resource "aws_lambda_function" "lambda" {
   function_name = var.project_name
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "lambda_handler"
+  handler       = "main.lambda_handler"
 
   s3_bucket = data.aws_s3_bucket.lambda_bucket.id
   s3_key = "${var.project_name}/lambda-pkg-${var.build_tag}.zip"
