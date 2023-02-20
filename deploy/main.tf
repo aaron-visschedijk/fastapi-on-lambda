@@ -28,3 +28,8 @@ resource "aws_iam_role" "iam_for_lambda" {
 }
 EOF
 }
+
+resource "aws_lambda_function_url" "lambda_url" {
+  function_name      = aws_lambda_function.lambda.arn
+  authorization_type = "NONE"
+}
