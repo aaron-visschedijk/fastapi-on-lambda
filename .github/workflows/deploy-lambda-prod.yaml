@@ -1,0 +1,63 @@
+name: Deploy Lambda Prod
+
+on: workflow_dispatch
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+  AWS_DEFAULT_REGION: eu-central-1
+
+jobs:
+  build-lambda-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Package Lambda and Requirements
+        run: |
+          pip install -r src/requirements.txt -t src
+          mkdir build
+          cd src
+          zip -9 -r ../build/lambda-pkg-${{ github.sha }}.zip ./
+          cd ..
+          pip install awscli
+          aws s3 sync --delete ./build s3://annomate-lambdas/${{ github.event.repository.name }}/
+  
+  terraform:
+    needs: build-lambda-package
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Init
+        id: init
+        run: |
+          cd deploy
+          terraform init
+      - name: Terraform Plan
+        id: plan
+        run: |
+          cd deploy
+          terraform plan \
+          -var 'env=prod' \
+          -var 'build_tag=${{ github.sha }}' \
+          -var 'project_name=${{ github.event.repository.name }}'
+      - name: Terraform Apply
+        id: apply
+        run: |
+          cd deploy
+          terraform apply -auto-approve \
+          -var 'env=prod' \
+          -var 'build_tag=${{ github.sha }}' \
+          -var 'project_name=${{ github.event.repository.name }}'
