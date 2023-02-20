@@ -13,3 +13,7 @@ terraform {
     dynamodb_table = "terraform-lock"
   }
 }
+
+provider "aws" {
+  region = var.aws_region
+}
