@@ -23,7 +23,9 @@ jobs:
         run: |
           pip install -r src/requirements.txt -t src
           mkdir build
-          zip -9 -r build/lambda-pkg-${{ github.sha }}.zip src
+          cd src
+          zip -9 -r ../build/lambda-pkg-${{ github.sha }}.zip ./
+          cd ..
           pip install awscli
           aws s3 sync --delete ./build s3://annomate-lambdas/${{ github.event.repository.name }}/
   
