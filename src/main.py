@@ -28,4 +28,9 @@ async def read_recipe(recipe_url_b64):
 async def get_user(user_id):
     return db.query(user_id)
 
+@app.get("/create_user/{user_id}/{email}")
+async def create_user(user_id, email):
+    db.create_user(user_id, email)
+    return "User created"
+
 handler = Mangum(app)
