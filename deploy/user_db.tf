@@ -1,7 +1,13 @@
-resource "aws_dynamo_db" "users" {
+resource "aws_dynamodb_table" "users" {
   name = "users"
   hash_key = "id"
-  hash_key_type = "S"
+  
+  attribute {
+    name = "id"
+    type = "S"
+  }
+
+
   read_capacity = 1
   write_capacity = 1
 }
