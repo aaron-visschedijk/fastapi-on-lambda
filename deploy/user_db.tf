@@ -2,6 +2,8 @@ resource "aws_dynamodb_table" "users" {
   name = "users"
   hash_key = "id"
   range_key = "creation_date"
+  read_capacity = 1
+  write_capacity = 1
   
   attribute {
     name = "id"
@@ -26,7 +28,4 @@ resource "aws_dynamodb_table" "users" {
     write_capacity = 1
     read_capacity = 1
   }
-
-  read_capacity = 1
-  write_capacity = 1
 }
