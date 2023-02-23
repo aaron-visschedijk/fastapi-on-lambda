@@ -21,9 +21,9 @@ jobs:
           cache: 'pip'
       - name: Package Lambda and Requirements
         run: |
-          pip install -r src/requirements.txt -t src
+          pip install -r app/requirements.txt -t app
           mkdir build
-          cd src
+          cd app
           zip -9 -r ../build/lambda-pkg-${{ github.sha }}.zip ./
           cd ..
           pip install awscli
