@@ -23,6 +23,8 @@ resource "aws_dynamodb_table" "users" {
     hash_key = "email"
     range_key = "creation_date"
     projection_type = "KEYS_ONLY"
+    write_capacity = 1
+    read_capacity = 1
   }
 
   read_capacity = 1
