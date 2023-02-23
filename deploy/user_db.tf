@@ -17,7 +17,8 @@ resource "aws_dynamodb_table" "users" {
   global_secondary_index {
     name = "email-index"
     hash_key = "email"
-    projection_type = "KEYS_ONLY"
+    projection_type = "INCLUDE"
+    non_key_attributes = ["password"]
     write_capacity = 1
     read_capacity = 1
   }
