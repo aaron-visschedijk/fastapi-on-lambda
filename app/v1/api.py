@@ -9,7 +9,6 @@ prefix = "/v1"
 router = APIRouter()
 
 
-@router.get("/")
 @router.get("")
 async def root():
     return {"message": "API v1 is live!"}

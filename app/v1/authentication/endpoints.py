@@ -10,9 +10,14 @@ from .dependants import authenticated_user
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("")
 async def root():
     return {"message": "Auth module is live!"}
+
+
+@router.get("/test")
+async def test():
+    return {"message": "Test!"}
 
 
 @router.post("/signup", summary="Sign up for a new account")
