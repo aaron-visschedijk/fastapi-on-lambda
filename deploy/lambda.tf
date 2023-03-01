@@ -14,15 +14,12 @@ resource "aws_lambda_function_url" "lambda_url" {
   authorization_type = "NONE"
 
   cors {
-    allowed_headers = ["*"]
-    allowed_methods = ["*"]
-    allowed_origins = ["*"]
-    allow_origins = [
-    "http://localhost:3000",
-    "https://localhost",
-    "https://localhost:3000",
-    "http://localhost"]
-    
+    allow_credentials = true
+    allow_origins     = ["*"]
+    allow_methods     = ["*"]
+    allow_headers     = ["*"]
+    expose_headers    = ["*"]
+    max_age           = 86400
   }
 }
 
