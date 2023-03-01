@@ -10,6 +10,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "https://ypp3d3jsvjj3unimeewvydwqyy0iludg.lambda-url.eu-central-1.on.aws/"
 ]
 
 app.add_middleware(
