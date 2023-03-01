@@ -6,25 +6,13 @@ import v1.api as api_v1
 app = FastAPI()
 
 
-origins = [
-    "http://localhost:3000",
-    "https://localhost"
-    "https://localhost:3000",
-    "http://localhost",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
 @app.get("/")
 async def root():
     return {"message": "API is live!"}
+
+@app.get("/health")
+async def health():
+    return {"message": "API is healthy!"}
 
 app.include_router(api_v1.router, prefix=api_v1.prefix)
 
