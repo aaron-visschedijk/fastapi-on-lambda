@@ -12,6 +12,18 @@ resource "aws_lambda_function" "lambda" {
 resource "aws_lambda_function_url" "lambda_url" {
   function_name      = aws_lambda_function.lambda.arn
   authorization_type = "NONE"
+
+  cors {
+    allowed_headers = ["*"]
+    allowed_methods = ["*"]
+    allowed_origins = ["*"]
+    allow_origins = [
+    "http://localhost:3000",
+    "https://localhost",
+    "https://localhost:3000",
+    "http://localhost"]
+    
+  }
 }
 
 resource "aws_cloudwatch_log_group" "lambda_log_group" {

@@ -8,7 +8,12 @@ from .protected import endpoints as protected
 
 app = FastAPI()
 
-origins = ["*"]
+origins = [
+    "http://localhost:3000",
+    "https://localhost"
+    "https://localhost:3000",
+    "http://localhost",
+]
 
 app.add_middleware(
     CORSMiddleware,
