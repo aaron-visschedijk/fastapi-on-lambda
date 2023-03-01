@@ -1,36 +1,30 @@
 from fastapi import FastAPI
+from fastapi.openapi.utils import get_openapi
 from mangum import Mangum
-from recipe_scrapers import scrape_me
-from recipe_scrapers._exceptions import WebsiteNotImplementedError
-from base64 import b64decode, binascii
-import db
+import v1.api as api_v1
 
 app = FastAPI()
 
 
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    app.openapi_schema = get_openapi(
+        title="FastAPI on AWS Lambda",
+        version="1.0.0",
+        description="[API v1 docs](/v1/docs)",
+        routes=app.routes,
+    )
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
+
+
 @app.get("/")
 async def root():
-    return {"message": "hello world"}
+    return {"message": "API is live!"}
 
-
-@app.get("/recipe/{recipe_url_b64}")
-async def read_recipe(recipe_url_b64):
-    try:
-        recipe_url = b64decode(recipe_url_b64).decode('utf-8')
-        scraper = scrape_me(recipe_url)
-        return scraper.to_json()
-    except binascii.Error:
-        return "Wrong encoding format"
-    except WebsiteNotImplementedError:
-        return "Recipe not found!"
-
-@app.get("/user/{user_id}")
-async def get_user(user_id):
-    return db.query(user_id)
-
-@app.get("/create_user/{user_id}/{email}")
-async def create_user(user_id, email):
-    db.create_user(user_id, email)
-    return "User created"
+app.mount("/v1", api_v1.app)
 
 handler = Mangum(app)
