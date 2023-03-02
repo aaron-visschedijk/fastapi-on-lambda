@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from .utils.jwt import verify_token
 
 
-token_url = "v1/auth/login"
+token_url = "/v1/auth/login"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=token_url)
 
 
