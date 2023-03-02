@@ -2,7 +2,7 @@ from fastapi import Depends
 from .authentication.dependants import authenticated_user
 from .authentication import endpoints as auth
 from .protected import endpoints as protected
-from lambdarouter_aaron_visschedijk.router import LambdaRouter
+from fastapi_lambda_router import LambdaRouter
 
 
 

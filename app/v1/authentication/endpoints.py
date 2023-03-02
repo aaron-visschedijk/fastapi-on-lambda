@@ -3,9 +3,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 from .models import UserAuth, User
 from .utils import user_db
 from .utils.jwt import create_access_token, create_refresh_token, decode_token, revoke_refresh_token, is_revoked
-from .utils.password import verify_password, get_password_hash
+from .utils.password import verify_password
 from .dependants import authenticated_user
-from lambdarouter_aaron_visschedijk.router import LambdaRouter
+from fastapi_lambda_router import LambdaRouter
 
 router = LambdaRouter()
 

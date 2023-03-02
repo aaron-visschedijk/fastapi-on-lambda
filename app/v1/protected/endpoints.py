@@ -1,6 +1,6 @@
-from fastapi import APIRouter
+from fastapi_lambda_router import LambdaRouter
 
-router = APIRouter()
+router = LambdaRouter()
 
 @router.get("/")
 async def root():
