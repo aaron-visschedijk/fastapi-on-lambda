@@ -2,8 +2,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 import v1.api as api_v1
+import logging
+import uvicorn
 
 app = FastAPI()
+
+logging.config.fileConfig("logging.conf", disable_existing_loggers=False)
+LOG = logging.getLogger(__name__)
 
 
 origins = [
@@ -23,6 +28,7 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "API is live!"}
+
 
 @app.get("/health")
 async def health():
