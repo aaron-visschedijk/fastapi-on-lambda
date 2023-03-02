@@ -11,7 +11,8 @@ router = LambdaRouter()
 
 @router.get("/")
 async def root():
-    return {"message": "Auth module is live!"}
+    user = user_db.get_user_by_email('user@example.com')
+    return {"message": user.json()}
 
 
 @router.post("/test")
