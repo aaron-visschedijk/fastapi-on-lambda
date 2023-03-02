@@ -1,5 +1,5 @@
 --extra-index-url https://test.pypi.org/simple/
-
+--use-deprecated=backtrack-on-build-failures
 anyio==3.6.2
 autopep8==2.0.1
 bcrypt==3.2.2
