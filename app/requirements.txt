@@ -1,3 +1,5 @@
+--extra-index-url https://test.pypi.org/simple/
+
 anyio==3.6.2
 autopep8==2.0.1
 bcrypt==3.2.2
@@ -64,3 +66,4 @@ w3lib==2.1.1
 watchfiles==0.18.1
 webencodings==0.5.1
 websockets==10.4
+lambdarouter_aaron_visschedijk==0.0.1

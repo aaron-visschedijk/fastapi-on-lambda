@@ -1,16 +1,15 @@
-from fastapi import APIRouter, Depends, HTTPException, Form
+from fastapi import Depends, HTTPException, Form
 from fastapi.security import OAuth2PasswordRequestForm
 from .models import UserAuth, User
 from .utils import user_db
 from .utils.jwt import create_access_token, create_refresh_token, decode_token, revoke_refresh_token, is_revoked
 from .utils.password import verify_password, get_password_hash
 from .dependants import authenticated_user
+from lambdarouter_aaron_visschedijk.router import LambdaRouter
 
+router = LambdaRouter()
 
-router = APIRouter()
-
-
-@router.get("")
+@router.get("/")
 async def root():
     return {"message": "Auth module is live!"}
 
