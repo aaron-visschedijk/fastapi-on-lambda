@@ -12,6 +12,13 @@ resource "aws_lambda_function" "lambda" {
 resource "aws_lambda_function_url" "lambda_url" {
   function_name      = aws_lambda_function.lambda.arn
   authorization_type = "NONE"
+
+  cors {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"]
+    allowed_origins = ["*"]
+    allow_credentials = true
+  }
 }
 
 resource "aws_cloudwatch_log_group" "lambda_log_group" {

@@ -14,7 +14,7 @@ async def root():
     return {"message": "Auth module is live!"}
 
 
-@router.get("/test")
+@router.post("/test")
 async def test():
     return {"message": "Test!"}
 
